@@ -1,0 +1,7 @@
+export enum OpeningType {
+    ABIERTA = 'ABIERTA',
+    SEMIABIERTA = 'SEMIABIERTA',
+    CERRADA = 'CERRADA',
+    FLANCO = 'FLANCO',
+    IRREGULAR = 'IRREGULAR'
+}

@@ -1,0 +1,51 @@
+<nav class="navbar navbar-expand-md bg-body-tertiary d-flex justify-content-between fw-semibold">
+  <div class="d-inline-flex align-items-center">
+    <a class="navbar-brand fs-2" href="#">
+      <img src="../favicon.ico" alt="Logo" width="70" height="70" class="d-inline-block align-text-center">
+      LIGA DE AJEDREZ
+    </a>
+  </div>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+    <ul class="navbar-nav fs-2">
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" routerLink="/tournaments/list">Torneos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/leagues/list">Ligas</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/games/list">Juegos</a>
+      </li>
+      <li class="nav-item dropdown">
+        <button class="nav-link btn-group-vertical btn-group-vertical-lg" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          [+]
+        </button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item" href="#">Jugadores</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item" href="#">Iniciar Sesión</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Main Router Outlet -->
+<div class="container-fluid" id="principal">
+  <div class="row">
+    <div class="col-md-12">
+      <div>
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="page-footer">
+  <div class="footer-copyright text-center py-2">
+    <a routerLink="/tournaments/list" id="colorFooterText2"> </a>
+  </div>
+</footer>

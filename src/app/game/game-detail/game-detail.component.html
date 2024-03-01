@@ -1,0 +1,97 @@
+<div class="row mb-5" *ngIf="gameDetail">
+  <div class="col-md-6 d-flex justify-content-center">
+    <img src="{{ gameDetail.image }}" alt="{{ gameDetail.id }}" class="game" style="max-width: 100%; object-fit: cover;">
+  </div>
+  <div class="col-md-6 p-5">
+    <h2 class="fs-1 fw-bold mt-4">{{ gameDetail.players[0].name }} vs {{ gameDetail.players[1].name }}</h2>
+    <dl>
+      <dt>Id</dt>
+      <dd class="fs-4">{{ gameDetail.id }}</dd>
+      <hr>
+      <dt>Resultado</dt>
+      <dd class="fs-4">{{ gameDetail.result }}</dd>
+      <hr>
+      <dt>Fecha</dt>
+      <dd class="fs-4">{{ gameDetail.date }}</dd>
+      <hr>
+      <dt>Torneo</dt>
+      <dd class="fs-4"><a class="nav-link" routerLink="/tournaments/{{ gameDetail.tournament.id }}">{{ gameDetail.tournament.name }}</a></dd>
+      <hr>
+      <dt>Apertura</dt>
+      <dd class="fs-4">{{ gameDetail.opening.classification }}: {{ gameDetail.opening.name }}</dd>
+      <hr>
+    </dl>
+  </div>
+</div>
+
+<h2 class="fs-2 fw-semibold">Jugadores</h2>
+<hr>
+<div class="container mb-5">
+  <div class="card">
+    <table class="table table-hover text-center table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">Avatar</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Puntaje ELO</th>
+          <th scope="col">Ciudad</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let player of gameDetail?.players" routerLink="/players/{{ player.id }}" class="cursor-pointer">
+          <th><img src="{{ player.photoURL }}" alt="{{ player.name }}" width="70" height="80" class="d-inline-block align-text-center"></th>
+          <td class="fs-4 align-middle">{{ player.name }}</td>
+          <td class="fs-4 align-middle">{{ player.eloRating }}</td>
+          <td class="fs-4 align-middle">{{ player.birthPlace }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<h2 class="fs-2 fw-semibold">Jugadas</h2>
+<hr>
+<div class="container mb-5">
+  <div class="card">
+    <table class="table table-hover text-center table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">Turno</th>
+          <th scope="col">Jugador</th>
+          <th scope="col">Jugada</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let move of gameDetail?.moves; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+          <td class="align-middle">{{ move.player.name }}</td>
+          <td class="align-middle">{{ move.notation }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<h2 class="fs-2 fw-semibold">Comentarios</h2>
+<hr>
+<div class="container-fluid mb-4">
+  <div class="row row-cols-auto justify-content-around">
+    <div
+      *ngFor="
+        let comment of gameDetail?.comments"
+        class="col mb-2">
+      <div class="card p-2" style="width: 18rem; height: 33rem; background-color: #B2EBF2;">
+        <img
+          class="card-img-top"
+          src="{{ comment.author.photoURL }}"
+          alt="{{ comment.author.name }}"
+        >
+        <div class="card-body">
+          <h5 class="card-title"><a routerLink="/authors/{{ comment.author.id }}">{{ comment.author.name }}</a></h5>
+          <p class="card-text">{{ comment.comment }}</p>
+          <p class="card-text text-end"><small class="text-body-secondary">{{ comment.date }}</small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

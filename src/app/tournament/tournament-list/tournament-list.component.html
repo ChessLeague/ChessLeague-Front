@@ -1,0 +1,43 @@
+<div *ngIf="selected">
+  <app-tournament-detail [tournamentDetail]="selectedTournament"></app-tournament-detail>
+</div>
+
+<div class="container-fluid mb-4">
+  <div class="d-flex justify-content-between">
+    <h2 class="fs-1 fw-bold">Torneos</h2>
+    <ul class="pagination my-auto" *ngIf="pagination">
+      <li class="page-item" [class.disabled]="p===1"><a class="page-link cursor-pointer" aria-label="Previous" (click)="p = p - 1"><span aria-hidden="true">&laquo;</span></a></li>
+      <li class="page-item" [class.d-none]="pagesNumber===2 && p===2" [class.active]="p===1"><a class="page-link cursor-pointer" (click)="p = (p === 1) ? p : (p == pagesNumber) ? (p-2) : p-1">{{ (p === 1) ? p : (p == pagesNumber) ? (p-2) : p-1 }}</a></li>
+      <li class="page-item" [class.d-none]="pagesNumber===1" [class.active]="p!=1 && p!=pagesNumber"><a class="page-link cursor-pointer" (click)="p = (p === 1) ? (p+1) : (p === pagesNumber) ? (p-1) : p">{{ (p === 1) ? (p+1) : (p === pagesNumber) ? (p-1) : p }}</a></li>
+      <li class="page-item" [class.d-none]="(pagesNumber===1) || (pagesNumber===2 && p===1)" [class.active]="p === pagesNumber"><a class="page-link cursor-pointer" (click)="p = (p === pagesNumber) ? p : (p === 1) ? (p + 2) : (p + 1)">{{ (p === pagesNumber) ? p : (p === 1) ? (p + 2) : (p + 1) }}</a></li>
+      <li class="page-item" [class.disabled]="p === pagesNumber"><a class="page-link cursor-pointer" aria-label="Next" (click)="p = p + 1"><span aria-hidden="true">&raquo;</span></a></li>
+    </ul>
+  </div>
+  <hr>
+  <div class="row row-cols-auto justify-content-around">
+    <div
+      *ngFor="
+        let tournament of tournaments
+        | paginate : { itemsPerPage: itemsPerPage, currentPage: p }"
+        class="col mb-2">
+      <div class="card p-2" style="width: 15rem; height: 25rem">
+        <img
+          class="card-img-top"
+          src="{{ tournament.image }}"
+          alt="{{ tournament.name }}"
+          (click)="onSelected(tournament)"
+        >
+        <div class="card-body">
+          <h5 class="card-title">{{ tournament.name }}</h5>
+          <p class="card-text">{{ tournament.league.name }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <h2>Mapa de los Torneos</h2>
+    <div class="col-md-12">
+      <div id="map"></div>
+    </div>
+  </div>
+</div>

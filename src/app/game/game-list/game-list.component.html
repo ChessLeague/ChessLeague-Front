@@ -1,0 +1,36 @@
+<div class="container-fluid mb-4">
+  <div class="d-flex justify-content-between">
+    <h2 class="fs-1 fw-bold">Juegos</h2>
+    <ul class="pagination my-auto" *ngIf="pagination">
+      <li class="page-item" [class.disabled]="p===1"><a class="page-link cursor-pointer" aria-label="Previous" (click)="p = p - 1; getGames()"><span aria-hidden="true">&laquo;</span></a></li>
+      <li class="page-item" [class.d-none]="pagesNumber===2 && p===2" [class.active]="p===1"><a class="page-link cursor-pointer" (click)="p = (p === 1) ? p : (p == pagesNumber) ? (p-2) : p-1; getGames()">{{ (p === 1) ? p : (p == pagesNumber) ? (p-2) : p-1 }}</a></li>
+      <li class="page-item" [class.d-none]="pagesNumber===1" [class.active]="p!=1 && p!=pagesNumber"><a class="page-link cursor-pointer" (click)="p = (p === 1) ? (p+1) : (p === pagesNumber) ? (p-1) : p; getGames()">{{ (p === 1) ? (p+1) : (p === pagesNumber) ? (p-1) : p }}</a></li>
+      <li class="page-item" [class.d-none]="(pagesNumber===1) || (pagesNumber===2 && p===1)" [class.active]="p === pagesNumber"><a class="page-link cursor-pointer" (click)="p = (p === pagesNumber) ? p : (p === 1) ? (p + 2) : (p + 1); getGames()">{{ (p === pagesNumber) ? p : (p === 1) ? (p + 2) : (p + 1) }}</a></li>
+      <li class="page-item" [class.disabled]="p === pagesNumber"><a class="page-link cursor-pointer" aria-label="Next" (click)="p = p + 1; getGames()"><span aria-hidden="true">&raquo;</span></a></li>
+    </ul>
+  </div>
+  <hr class="mt-1">
+  <div class="row row-cols-auto justify-content-around">
+    <div
+      *ngFor="
+        let game of games"
+        class="col mb-2">
+      <div class="card p-2" style="width: 15rem; height: 22rem; background-color: #e8ccfc;">
+        <img
+          class="card-img-top"
+          style="height: 9rem; object-fit: cover;"
+          src="{{ game.image }}"
+          alt="{{ game.id }}"
+        >
+        <div class="card-body row">
+          <div>
+            <h5 class="card-title">{{ game.players[0].name }} vs {{ game.players[1].name }}</h5>
+            <p class="card-text">{{ game.tournament.name }}</p>
+            <p class="card-text text-end"><small class="text-body-secondary">{{ game.date }}</small></p>
+          </div>
+          <div class="text-center align-self-end"><a routerLink="/games/{{ game.id }}" class="btn btn-light">Detalles</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

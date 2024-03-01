@@ -1,0 +1,45 @@
+<div class="container-fluid mt-2">
+  <h1>Leagues</h1>
+  
+  <div *ngIf="pagination" class="pagination-box">
+    <ul class="pagination">
+      <li class="page-item" [class.disabled]="p === 1">
+        <a class="page-link cursor-pointer" aria-label="Previous" (click)="p = p - 1">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li *ngFor="let pageNumber of getPages()" class="page-item" [class.active]="p === pageNumber">
+        <a class="page-link cursor-pointer" (click)="p = pageNumber">{{ pageNumber }}</a>
+      </li>
+      <li class="page-item" [class.disabled]="p === pagesNumber">
+        <a class="page-link cursor-pointer" aria-label="Next" (click)="p = p + 1">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+  <div class="row" *ngFor="let league of leagues | slice:(p-1)*itemsPerPage: (p-1 + 1)*itemsPerPage">
+    <div class="col-2">
+      <p>{{ league.name }}</p>
+    </div>
+    <div class="col-10">
+      <div class="row">
+        <div
+          class="card p-2 mb-2"
+          style="width: 10rem; height: 10rem"
+          *ngFor="let tournament of league.tournaments"
+        >
+          <img
+            class="card-img-top"
+            src="{{ tournament.image }}"
+            alt="{{ tournament.name }}"
+            routerLink="/tournaments/{{ tournament.id }}"
+          />
+        </div>
+      </div>
+    </div>
+    <hr />
+  </div>
+</div>

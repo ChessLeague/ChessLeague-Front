@@ -1,0 +1,33 @@
+<div  id="tournamentdet" class="container-fluid">
+  <p class="h3 p-3">{{ tournamentDetail.name }}</p>
+  <div class="row">
+    <div class="col-2">
+      <div class="thumb">
+        <img
+          class="img-fluid"
+          src="{{ tournamentDetail.image }}"
+          alt="{{ tournamentDetail.name }}"
+        />
+      </div>
+    </div>
+    <div class="col">
+      <dl>
+        <dt>Lugar</dt>
+        <dd>{{ tournamentDetail.location }}</dd>
+        <hr />
+        <dt>Fecha</dt>
+        <dd>{{ tournamentDetail.date }}</dd>
+        <hr />
+        <dt class="bold">Liga</dt>
+        <dd>{{ tournamentDetail.league.name }}</dd>
+        <hr />
+        <dt class="bold">Premio</dt>
+        <dd>{{ tournamentDetail.prize}}</dd>
+        <dt>Juegos (id)</dt>
+        <dd class="caption" *ngFor="let game of tournamentDetail.games">
+          {{ game.id }}
+        </dd>
+      </dl>
+    </div>
+  </div>
+ </div>
